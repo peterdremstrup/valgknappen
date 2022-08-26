@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="dk.api.stm.valg.UdskrivValgService.binding.min.js"></script>
+    <link href="dk.api.stm.valg.UdskrivValgService.binding.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="regeringOverMidten">
+
+      <div class="tick" data-value="" data-did-init="setupFlip">
+        <div data-repeat="true" aria-hidden="true">
+          <span data-view="flip"></span>
+        </div>
+      </div>
+
+      <button id="valg"><span>Valg!</span></button>
+    </div>
+
+    <script>
+      var knap = document.getElementById("valg");
+      var confetti = new JSConfetti();
+
+      function setupFlip(tick) {
+        globalTick = tick;
+        fetch('/count').then(r => r.json()).then(j => tick.value = j["count"]);
+      }
+
+      function udskrivValget() {
+        knap.classList.add("pressed");
+        knap.removeEventListener("click", udskrivValget);
+
+        confetti.addConfetti({
+          emojis: [
+            "🗳️", "🗳️", "🗳️", "🦠", "😷", "🪖", "🇺🇦", "⛽", "🙈", "🙉", "🙊", "🌍", "🌊", "🔥",
+          ],
+        });      
+
+        setTimeout(function() {
+            UdskrivValgServiceType_UdskrivValg();
+            knap.classList.remove("pressed");
+            knap.addEventListener("click", udskrivValget);
+            globalTick.value++;
+        }, 1500);
+      }
+
+      knap.addEventListener("click", udskrivValget);
+    </script>
+  </body>
+</html>
