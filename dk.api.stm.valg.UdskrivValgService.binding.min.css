@@ -30,6 +30,7 @@ button {
   -webkit-user-select: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   position: relative;
+  border: 0px solid transparent;
 }
 
 button span {
@@ -42,9 +43,11 @@ button:hover {
 }
 
 button:active {
+  border: 5px solid red;
+  color: rgba(255,255,255,.9);
   box-shadow: 0 14px 0 rgb(183, 9, 0), 0 20px 36px rgba(0, 0, 0, 0.35), 0 70px 55px rgba(0,0,0,0.2) inset, 0 -10px 20px rgba(255,255,255,0.35) inset;
   transform: translateY(3px);
-  transition: 0.4s all ease-in, box-shadow .15s ease-out, transform .15s ease-out;
+  transition: 0.4s all ease-in, border .15s ease-out, box-shadow .15s ease-out, transform .15s ease-out, color .15s ease-out;
 }
 
 @keyframes glow {
