@@ -23,12 +23,13 @@ button {
   background: red;
   text-shadow: 0 3px 1px rgba(122, 17, 8, 0.8);
   box-shadow: 0 16px 0 rgb(183, 9, 0), 0 30px 40px rgba(0, 0, 0, 0.35);
-  transition: 0.4s all ease-in, transform .1s ease-in;
+  transition: 0.4s all ease-in, box-shadow .15s ease-in, transform .15s ease-in;
   outline: none;
   text-align: center;
   cursor: pointer;
   -webkit-user-select: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  position: relative;
 }
 
 button span {
@@ -41,9 +42,38 @@ button:hover {
 }
 
 button:active {
-  box-shadow: 0 70px 55px rgba(0,0,0,0.2) inset, 0 -10px 20px rgba(255,255,255,0.5) inset, 0 16px 0 rgb(183, 9, 0), 0 30px 40px rgba(0, 0, 0, 0.35);
-  transform: translateY(4px);
-  transition: 0.4s all ease-in, transform .1s ease-in;
+  box-shadow: 0 14px 0 rgb(183, 9, 0), 0 20px 36px rgba(0, 0, 0, 0.35), 0 70px 55px rgba(0,0,0,0.2) inset, 0 -10px 20px rgba(255,255,255,0.35) inset;
+  transform: translateY(3px);
+  transition: 0.4s all ease-in, box-shadow .15s ease-out, transform .15s ease-out;
+}
+
+@keyframes glow {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+button:before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(rgba(255,235,160,.5) 30%, rgba(255,255,255,0) 70%);
+  border-radius: 50%;
+  z-index: 10;
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  animation: glow 0s reverse 1 forwards;
+}
+
+button.pressed:before {
+  animation: glow .75s alternate infinite;
 }
 
   /*
